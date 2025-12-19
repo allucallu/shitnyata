@@ -1178,3 +1178,121 @@ footer {
         }
     }
 }
+}
+
+/* Responsive Category Page */
+.category-page {
+    @media (max-width: 600px) {
+        .page-header {
+            margin-bottom: 20px;
+
+            h1 {
+                font-size: 28px;
+            }
+        }
+
+        .category-nav {
+            margin-bottom: 30px;
+            gap: 10px;
+
+            .cat-pill {
+                font-size: 11px;
+                padding: 6px 12px;
+            }
+        }
+
+        /* Logic: Hide posts by default on mobile, show only when targeted */
+        .cat-post-grid {
+            display: none;
+            /* Hidden by default */
+
+            /* Animation for revealing */
+            animation: fadeIn 0.5s ease;
+        }
+
+        /* When a section is targeted (clicked from nav), show its posts */
+        .category-section:target .cat-post-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            margin-top: 20px;
+        }
+
+        /* Show a hint that it's expandable */
+        .category-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: rgba($light-navy, 0.3);
+            border-radius: $border-radius;
+            border: 1px solid transparent;
+
+            &:target {
+                background-color: transparent;
+                border: none;
+                padding: 0;
+            }
+
+            .section-header {
+                margin-bottom: 0;
+                justify-content: space-between;
+                cursor: pointer;
+
+                h2 {
+                    font-size: 18px;
+                    margin: 0;
+                }
+
+                /* Add a hint icon or text */
+                &::after {
+                    content: "▼";
+                    font-size: 12px;
+                    color: $slate;
+                    transform: rotate(-90deg);
+                    transition: transform 0.3s;
+                }
+            }
+
+            /* Rotate arrow when active/target */
+            &:target .section-header {
+                margin-bottom: 20px;
+
+                &::after {
+                    transform: rotate(0deg);
+                    color: $amber;
+                }
+            }
+        }
+
+        /* Compact Post Card for Mobile */
+        .cat-post-card {
+            padding: 15px;
+
+            h3 {
+                font-size: 16px;
+                margin-bottom: 5px;
+            }
+
+            .cat-date {
+                font-size: 11px;
+                margin-bottom: 5px;
+            }
+
+            .cat-excerpt,
+            .cat-read-more {
+                display: none;
+                /* Hide excerpt/button to save space as requested */
+            }
+        }
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
