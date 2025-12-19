@@ -503,6 +503,12 @@ header {
             border-radius: $border-radius;
             transition: $transition;
 
+            &.disabled {
+                border: none;
+                background: none;
+                pointer-events: none;
+            }
+
             &:hover {
                 border-color: $amber;
                 background-color: rgba($amber, 0.05);

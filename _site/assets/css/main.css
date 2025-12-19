@@ -1,3 +1,4 @@
+@charset "UTF-8";
 body {
   margin: 0;
   width: 100%;
@@ -547,6 +548,11 @@ header nav ul li a.active {
   border: 1px solid #233554;
   border-radius: 4px;
   transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+.post .post-navigation .nav-link.disabled {
+  border: none;
+  background: none;
+  pointer-events: none;
 }
 .post .post-navigation .nav-link:hover {
   border-color: #ffc107;
@@ -1251,3 +1257,5 @@ footer .footer-quote {
     transform: translateY(0);
   }
 }
+
+/*# sourceMappingURL=main.css.map */
