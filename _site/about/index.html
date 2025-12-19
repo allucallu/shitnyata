@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>About ShitNyata - ShitNyata</title>
+    <meta name="description"
+        content="Realita itu kadang taik. Disini kita ketawain aja.">
+    <link rel="stylesheet" href="/%20/assets/css/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Inter:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id="></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', '');
+</script>
+
+    <!-- 
+    TEMPAT SCRIPT IKLAN (HEAD)
+    
+    1. Google AdSense (Auto Ads):
+       Paste script <script async src="..."></script> dari Google di sini.
+       
+    2. Adsterra (Pop-under / Social Bar):
+       Paste script yang disuruh taruh di <head> di sini.
+       
+    Biarkan kosong jika belum ada iklan.
+-->
+</head>
+
+<body>
+
+    <header>
+        <a href="/%20/" class="logo">ShitNyata.</a>
+
+        <button class="menu-toggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav>
+            <ul>
+                <li><a href="/%20/" class="">Home</a></li>
+                <li><a href="/%20/kategori/"
+                        class="">Kategori</a></li>
+                <li><a href="/%20/about/"
+                        class="active">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container site-main">
+        <article class="page">
+    <header class="post-header">
+        <h1>About ShitNyata</h1>
+    </header>
+
+    <div class="page-content">
+        <div class="about-container">
+    <p class="about-meta">Established circa whenever we felt like it.</p>
+
+    <div class="satir-quote">
+        "Kami tidak menjanjikan solusi hidup, tapi kami menjanjikan hiburan dari masalah hidup orang lain."
+    </div>
+
+    <p class="about-intro">
+        <strong>ShitNyata</strong> adalah tempat sampah digital untuk menampung segala keluh kesah, pikiran random, dan observasi tidak penting tentang realita yang seringkali mengecewakan namun lucu.
+    </p>
+
+    <div class="mission-vision-grid">
+        <div class="card mission">
+            <h3>Misi Kami</h3>
+            <p>Tidak ada. Kami cuma mau nulis apa yang ada di kepala tanpa filter (tapi boong, tetep ada filter biar gak dicyduk).</p>
+        </div>
+        <div class="card vision">
+            <h3>Visi Kami</h3>
+            <p>Menjadi website shitpost nomor satu di localhost anda, dan mungkin suatu hari nanti di server production.</p>
+        </div>
+    </div>
+
+    <div class="disclaimer-note">
+        <hr />
+        <p><em>Disclaimer: Semua konten di sini adalah fiktif belaka, kecuali yang beneran kejadian. Jika ada kesamaan nama, tokoh, atau tempat, itu murni kesengajaan alam semesta yang sedang bercanda.</em></p>
+    </div>
+</div>
+
+    </div>
+</article>
+    </main>
+
+    <footer>
+        <span class="footer-quote">"Kalau bisa dipersulit, kenapa harus dipermudah?"</span>
+        <p>&copy; 2025 ShitNyata. All wrongs reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('header nav');
+
+            if (toggle && nav) {
+                toggle.addEventListener('click', () => {
+                    nav.classList.toggle('active');
+                    toggle.classList.toggle('active');
+                });
+            }
+        });
+    </script>
+    <script>
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert('Link tercopy! Sebarkanlah keburukan ini.');
+            }).catch(err => {
+                console.error('Gagal copy: ', err);
+            });
+        }
+    </script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</body>
+
+</html>

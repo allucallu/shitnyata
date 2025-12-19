@@ -1,0 +1,104 @@
+body {
+    margin: 0;
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    background-color: $dark-navy;
+    color: $slate;
+    font-family: $font-sans;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0 0 20px 0;
+    font-weight: 700;
+    color: $lightest-slate;
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: clamp(40px, 8vw, 60px);
+}
+
+h2 {
+    font-size: clamp(30px, 6vw, 40px);
+}
+
+h3 {
+    font-size: 24px;
+}
+
+h4 {
+    font-size: 20px;
+}
+
+p {
+    margin: 0 0 15px 0;
+}
+
+a {
+    display: inline-block;
+    text-decoration: none;
+    text-decoration-skip-ink: auto;
+    color: $amber;
+    position: relative;
+    transition: $transition;
+
+    &:hover,
+    &:focus {
+        color: $amber;
+        opacity: 0.8;
+    }
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 25px;
+}
+
+blockquote {
+    border-left: 2px solid $amber;
+    padding-left: 20px;
+    margin: 20px 0;
+    font-style: italic;
+    color: $light-slate;
+    background: rgba(255, 193, 7, 0.05);
+    padding: 15px 20px;
+}
+
+code {
+    font-family: $font-mono;
+    font-size: 0.9em;
+    color: $amber;
+    background-color: $light-navy;
+    padding: 0 5px;
+    border-radius: 2px;
+}
+
+.btn {
+    color: $amber;
+    background-color: transparent;
+    border: 1px solid $amber;
+    border-radius: $border-radius;
+    padding: 0.75rem 1rem;
+    font-size: 14px;
+    font-family: $font-mono;
+    line-height: 1;
+    text-decoration: none;
+    cursor: pointer;
+    transition: $transition;
+
+    &:hover {
+        background-color: $amber-tint;
+        transform: translateY(-2px);
+    }
+}

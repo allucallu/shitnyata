@@ -1,0 +1,45 @@
+---
+layout: page
+title: Kategori
+permalink: /kategori/
+---
+
+<div class="category-page">
+    <div class="page-header">
+        <h1>Arsip Omong Kosong</h1>
+        <p>Kumpulan tulisan berdasarkan jenis kegilaannya.</p>
+    </div>
+
+    <!-- Category Cloud / Navigation -->
+    <div class="category-nav">
+        {% for category in site.categories %}
+        <a href="#cat-{{ category | first | slugify }}" class="cat-pill">
+            #{{ category | first }} <span class="count">{{ category | last | size }}</span>
+        </a>
+        {% endfor %}
+    </div>
+
+    <div class="category-groups">
+        {% for category in site.categories %}
+        <section id="cat-{{ category | first | slugify }}" class="category-section">
+            <div class="section-header">
+                <h2>#{{ category | first }}</h2>
+                <span class="line"></span>
+            </div>
+
+            <div class="cat-post-grid">
+                {% for post in category.last %}
+                <article class="cat-post-card">
+                    <span class="cat-date">{{ post.date | date: "%d %b %Y" }}</span>
+                    <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+                    <div class="cat-excerpt">
+                        {{ post.excerpt | strip_html | truncatewords: 15 }}
+                    </div>
+                    <a href="{{ post.url | relative_url }}" class="cat-read-more">Buka &rarr;</a>
+                </article>
+                {% endfor %}
+            </div>
+        </section>
+        {% endfor %}
+    </div>
+</div>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+    <meta name="description"
+        content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+    <link rel="stylesheet" href="{{ " /assets/css/main.css" | relative_url }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Inter:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    {% include analytics.html %}
+    {% include ads-head.html %}
+</head>
+
+<body>
+
+    <header>
+        <a href="{{ " /" | relative_url }}" class="logo">ShitNyata.</a>
+
+        <button class="menu-toggle" aria-label="Toggle navigation">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <nav>
+            <ul>
+                <li><a href="{{ " /" | relative_url }}" class="{% if page.url == '/' %}active{% endif %}">Home</a></li>
+                <li><a href="{{ " /kategori/" | relative_url }}"
+                        class="{% if page.url contains '/kategori/' %}active{% endif %}">Kategori</a></li>
+                <li><a href="{{ " /about/" | relative_url }}"
+                        class="{% if page.url == '/about/' %}active{% endif %}">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container site-main">
+        {{ content }}
+    </main>
+
+    <footer>
+        <span class="footer-quote">"Kalau bisa dipersulit, kenapa harus dipermudah?"</span>
+        <p>&copy; {{ site.time | date: '%Y' }} ShitNyata. All wrongs reserved.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggle = document.querySelector('.menu-toggle');
+            const nav = document.querySelector('header nav');
+
+            if (toggle && nav) {
+                toggle.addEventListener('click', () => {
+                    nav.classList.toggle('active');
+                    toggle.classList.toggle('active');
+                });
+            }
+        });
+    </script>
+    <script>
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert('Link tercopy! Sebarkanlah keburukan ini.');
+            }).catch(err => {
+                console.error('Gagal copy: ', err);
+            });
+        }
+    </script>
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+</body>
+
+</html>

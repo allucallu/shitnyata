@@ -1,0 +1,42 @@
+---
+layout: default
+---
+
+<section class="hero-section">
+    <h1>ShitNyata.</h1>
+    <span class="tagline">Realita itu pahit, makanya dikasih gula (berupa sarkasme).</span>
+    <p class="description">Tempat pelarian digital untuk menertawakan ketidakjelasan hidup, satu postingan tidak penting
+        pada satu waktu.</p>
+</section>
+
+<section class="home">
+    {% include marquee.html %}
+
+    <div class="home-grid">
+        <div class="main-content">
+            <ul class="post-list">
+                {% for post in site.posts %}
+                <li class="post-card {% if post.image %}has-image{% endif %}">
+                    {% if post.image %}
+                    <div class="post-thumbnail">
+                        <img src="{{ post.image | relative_url }}" alt="{{ post.title }}" loading="lazy">
+                    </div>
+                    {% endif %}
+                    <div class="post-card-content">
+                        <span class="post-meta">{{ post.date | date: "%d %B %Y" }}</span>
+                        <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+                        <div class="post-excerpt">
+                            {{ post.excerpt | strip_html | truncatewords: 20 }}
+                        </div>
+                        <a href="{{ post.url | relative_url }}" class="read-more">Baca Selengkapnya &rarr;</a>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="sidebar-wrapper">
+            {% include sidebar.html %}
+        </div>
+    </div>
+</section>
