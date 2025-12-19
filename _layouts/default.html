@@ -7,7 +7,7 @@
     <title>{% if page.title %}{{ page.title }} - {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
     <meta name="description"
         content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
-    <link rel="stylesheet" href="{{ " /assets/css/main.css" | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Inter:wght@400;600;700&display=swap"
@@ -19,7 +19,7 @@
 <body>
 
     <header>
-        <a href="{{ " /" | relative_url }}" class="logo">ShitNyata.</a>
+        <a href="{{ '/' | relative_url }}" class="logo">ShitNyata.</a>
 
         <button class="menu-toggle" aria-label="Toggle navigation">
             <span></span>
@@ -29,10 +29,10 @@
 
         <nav>
             <ul>
-                <li><a href="{{ " /" | relative_url }}" class="{% if page.url == '/' %}active{% endif %}">Home</a></li>
-                <li><a href="{{ " /kategori/" | relative_url }}"
+                <li><a href="{{ '/' | relative_url }}" class="{% if page.url == '/' %}active{% endif %}">Home</a></li>
+                <li><a href="{{ '/kategori/' | relative_url }}"
                         class="{% if page.url contains '/kategori/' %}active{% endif %}">Kategori</a></li>
-                <li><a href="{{ " /about/" | relative_url }}"
+                <li><a href="{{ '/about/' | relative_url }}"
                         class="{% if page.url == '/about/' %}active{% endif %}">About</a></li>
             </ul>
         </nav>
