@@ -19,13 +19,13 @@
     <!-- Category Widget (Optional/Simple) -->
     <div class="sidebar-widget">
         <div class="widget-header">
-            <h3>Topik Tidak Penting</h3>
+            <h3>Tulisan Terbaru</h3>
         </div>
         <div class="widget-content">
             <ul class="clean-list">
-                <li><a href="#">Tutorial Bernapas</a></li>
-                <li><a href="#">Drama Kantor</a></li>
-                <li><a href="#">Konspirasi Kucing</a></li>
+                {% for post in site.posts limit:5 %}
+                <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
+                {% endfor %}
             </ul>
         </div>
     </div>

@@ -346,6 +346,11 @@ header {
             color: $lightest-slate;
             font-size: clamp(32px, 5vw, 48px);
             line-height: 1.1;
+
+            @media (max-width: 600px) {
+                font-size: 28px;
+                /* Smaller title on mobile */
+            }
         }
 
         .meta {
@@ -393,6 +398,12 @@ header {
         font-size: 20px;
         color: $slate;
 
+        @media (max-width: 600px) {
+            font-size: 17px;
+            /* Reduced body font on mobile */
+            line-height: 1.6;
+        }
+
         p {
             margin-bottom: 2rem;
             line-height: 1.7;
@@ -404,6 +415,12 @@ header {
             color: $lightest-slate;
             position: relative;
             padding-left: 15px;
+
+            @media (max-width: 600px) {
+                font-size: 22px;
+                /* Smaller h2 on mobile */
+                margin-top: 2rem;
+            }
 
             &::before {
                 content: "#";
@@ -419,6 +436,11 @@ header {
             margin-top: 2rem;
             margin-bottom: 1rem;
             color: $lightest-slate;
+
+            @media (max-width: 600px) {
+                font-size: 19px;
+                /* Smaller h3 on mobile */
+            }
         }
 
         hr {
@@ -431,6 +453,12 @@ header {
         blockquote {
             font-size: 22px;
             margin: 2.5rem 0;
+
+            @media (max-width: 600px) {
+                font-size: 18px;
+                /* Smaller blockquote on mobile */
+                margin: 1.5rem 0;
+            }
         }
     }
 
