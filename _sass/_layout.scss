@@ -9,7 +9,7 @@ header {
     backdrop-filter: blur(10px);
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 999999;
     border-bottom: 1px solid rgba($lightest-navy, 0.3);
 
     @media (max-width: 768px) {
@@ -23,7 +23,7 @@ header {
         color: $amber;
         font-family: $font-mono;
         letter-spacing: -1px;
-        z-index: 101;
+        z-index: 1000000;
 
         &:hover {
             color: $lightest-slate;
@@ -37,7 +37,7 @@ header {
         border: none;
         cursor: pointer;
         padding: 10px;
-        z-index: 101;
+        z-index: 1000000;
 
         span {
             display: block;
@@ -116,6 +116,7 @@ header {
             width: 100%;
             height: 100vh;
             background-color: $dark-navy;
+            z-index: 999998;
             display: flex;
             flex-direction: column;
             justify-content: center;
