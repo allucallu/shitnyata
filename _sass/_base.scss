@@ -1,8 +1,11 @@
+html,
 body {
     margin: 0;
+    padding: 0;
     width: 100%;
     min-height: 100vh;
-    overflow-x: hidden;
+    overflow-x: hidden !important;
+    /* Force hide horizontal scroll */
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
     background-color: $dark-navy;
@@ -10,6 +13,8 @@ body {
     font-family: $font-sans;
     font-size: 18px;
     line-height: 1.6;
+    position: relative;
+    /* Ensure it stays as reference */
 }
 
 h1,
