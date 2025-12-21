@@ -58,6 +58,24 @@ layout: default
         </div>
     </div>
 
+    {% endif %}
+
+    <!-- Affiliate Card Integration -->
+    {% if page.affiliate %}
+    <div class="affiliate-card">
+        <div class="aff-image">
+            <img src="{{ page.affiliate.image_url }}" alt="{{ page.affiliate.product_name }}">
+        </div>
+        <div class="aff-details">
+            <span class="aff-label">Racun Shopee Pilihan Admin</span>
+            <h4>{{ page.affiliate.product_name }}</h4>
+            <a href="{{ page.affiliate.product_link }}" target="_blank" class="aff-btn">
+                Cek Harga / Beli &rarr;
+            </a>
+        </div>
+    </div>
+    {% endif %}
+
     <div class="post-ending">
         <span class="ending-divider">***</span>
         <p>Terima kasih sudah membuang waktu berharga anda untuk membaca omong kosong ini. Semoga harimu menyenangkan
