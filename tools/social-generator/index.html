@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShitNyata Social Generator (Final)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Inter:wght@400;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --dark-navy: #0a192f;
+            --light-navy: #112240;
+            --slate: #8892b0;
+            --light-slate: #a8b2d1;
+            --lightest-slate: #ccd6f6;
+            --amber: #ffc107;
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        /* RESTORED V1 HIGHLIGHT STYLE */
+        .highlight {
+            color: var(--amber);
+            background: rgba(255, 193, 7, 0.1);
+            padding: 0 10px;
+            /* Original wide padding */
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #020c1b;
+            color: var(--lightest-slate);
+            font-family: var(--font-sans);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* SIDEBAR CONTROLS */
+        .controls {
+            width: 380px;
+            background-color: var(--light-navy);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            overflow-y: auto;
+            z-index: 10;
+            box-shadow: 5px 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        h2 {
+            color: var(--amber);
+            font-family: var(--font-mono);
+            margin-top: 0;
+            font-size: 20px;
+        }
+
+        h3 {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--slate);
+            margin: 10px 0 5px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 5px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 12px;
+            color: var(--slate);
+        }
+
+        textarea,
+        input,
+        select {
+            width: 100%;
+            background-color: var(--dark-navy);
+            border: 1px solid var(--slate);
+            color: white;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: var(--font-sans);
+            margin-bottom: 5px;
+            box-sizing: border-box;
+            font-size: 13px;
+        }
+
+        textarea {
+            height: 80px;
+            resize: vertical;
+        }
+
+        .btn {
+            background-color: var(--amber);
+            color: var(--dark-navy);
+            border: none;
+            padding: 12px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        /* MODE SWITCHER */
+        .mode-switch {
+            display: flex;
+            background: var(--dark-navy);
+            padding: 5px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .mode-btn {
+            flex: 1;
+            padding: 8px;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            color: var(--slate);
+        }
+
+        .mode-btn.active {
+            background-color: var(--amber);
+            color: var(--dark-navy);
+        }
+
+        /* SLIDE NAVIGATOR */
+        .slide-nav {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 15px;
+            justify-content: space-between;
+        }
+
+        .slide-dot {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--dark-navy);
+            color: var(--slate);
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+            border: 1px solid transparent;
+        }
+
+        .slide-dot.active {
+            border-color: var(--amber);
+            color: var(--amber);
+        }
+
+        /* PREVIEW AREA */
+        .preview-area {
+            flex: 1;
+            background-color: #020c1b;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background-image: radial-gradient(var(--light-navy) 1px, transparent 1px);
+            background-size: 30px 30px;
+            overflow: auto;
+            padding: 20px;
+        }
+
+        #canvas {
+            background-color: var(--dark-navy);
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            transition: all 0.3s;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            width: 600px;
+            height: 600px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        #canvas.story {
+            width: 450px;
+            height: 800px;
+        }
+
+        .bg-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 48%, rgba(255, 193, 7, 0.02) 48%, rgba(255, 193, 7, 0.02) 52%, transparent 52%);
+            background-size: 50px 50px;
+            z-index: 0;
+        }
+
+        .brand-footer {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--slate);
+            opacity: 0.7;
+            z-index: 10;
+        }
+
+        /* V1 ELEMENTS FOR QUOTE */
+        .corner-accent {
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            border: 3px solid var(--amber);
+            opacity: 0.8;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .top-left {
+            top: 40px;
+            left: 40px;
+            border-bottom: none;
+            border-right: none;
+        }
+
+        .bottom-right {
+            bottom: 40px;
+            right: 40px;
+            border-top: none;
+            border-left: none;
+        }
+
+        .logo {
+            position: absolute;
+            top: 50px;
+            right: 50px;
+            font-family: var(--font-mono);
+            color: var(--amber);
+            font-size: 32px;
+            z-index: 2;
+            font-weight: bold;
+        }
+
+        /* LAYOUTS */
+        .slide-layout {
+            padding: 60px;
+            height: 100%;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            z-index: 5;
+            position: relative;
+        }
+
+        /* Quote Layout - MATCHING V1 */
+        .layout-quote {
+            justify-content: center;
+            text-align: left;
+            padding: 60px;
+            /* Revised padding for 600px canvas */
+        }
+
+        .layout-quote .quote-text {
+            font-size: 32px;
+            /* Large font size request */
+            font-weight: 900;
+            color: var(--lightest-slate);
+            line-height: 1.25;
+            margin-bottom: 30px;
+            letter-spacing: -0.5px;
+        }
+
+        .layout-quote .quote-author {
+            font-family: var(--font-mono);
+            color: var(--slate);
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .layout-quote .quote-author::before {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--amber);
+        }
+
+        /* Carousel Cover */
+        .layout-cover {
+            justify-content: center;
+            text-align: center;
+        }
+
+        .layout-cover h1 {
+            font-size: 48px;
+            color: var(--lightest-slate);
+            margin: 0;
+            line-height: 1.2;
+            text-transform: capitalize;
+        }
+
+        .layout-cover p {
+            color: var(--slate);
+            margin-top: 20px;
+            font-family: var(--font-mono);
+        }
+
+        /* Carousel Content */
+        .layout-content {
+            justify-content: center;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .layout-content h2 {
+            font-size: 32px;
+            color: var(--amber);
+            margin-bottom: 25px;
+            border-bottom: 2px solid rgba(255, 193, 7, 0.2);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .layout-content .body-text {
+            font-size: 24px;
+            color: var(--lightest-slate);
+            line-height: 1.6;
+            white-space: pre-wrap;
+            max-width: 95%;
+            margin: 0 auto;
+        }
+
+        /* Carousel Outro */
+        .layout-outro {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .layout-outro .scale-icon {
+            font-size: 60px;
+            color: var(--amber);
+            margin-bottom: 30px;
+            animation: bounce 2s infinite;
+        }
+
+        .layout-outro h2 {
+            font-size: 32px;
+            color: var(--lightest-slate);
+        }
+
+        .layout-outro .cta-box {
+            margin-top: 30px;
+            border: 1px dashed var(--slate);
+            padding: 20px;
+            border-radius: 10px;
+            color: var(--light-slate);
+        }
+
+        .layout-outro .cta-icons {
+            display: flex;
+            gap: 20px;
+            font-size: 24px;
+            margin-top: 15px;
+            justify-content: center;
+            color: var(--amber);
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-10px);
+            }
+
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .slide-number {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-family: var(--font-mono);
+            color: var(--amber);
+            font-size: 14px;
+            border: 1px solid var(--amber);
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            z-index: 10;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="controls">
+        <h2>🛠️ Social Generator Final</h2>
+
+        <div class="mode-switch">
+            <div class="mode-btn active" onclick="setMode('quote')" id="btn-mode-quote">Single Quote</div>
+            <div class="mode-btn" onclick="setMode('carousel')" id="btn-mode-carousel">Carousel</div>
+        </div>
+
+        <div>
+            <label>Format Size</label>
+            <select id="formatSelect" onchange="updateFormat()">
+                <option value="square">Square (1:1)</option>
+                <option value="story">Portrait (9:16)</option>
+            </select>
+        </div>
+
+        <!-- QUOTE INPUTS -->
+        <div id="controls-quote">
+            <label>Isi Kutipan</label>
+            <textarea id="quoteInput" oninput="render()"
+                placeholder="Hidup itu keras...">Hidup itu seperti komedi putar.</textarea>
+
+            <label>Ukuran Font: <span id="fontSizeDisplay">32px</span></label>
+            <input type="range" id="fontSizeInput" min="24" max="80" value="32" oninput="render()">
+
+            <label>Penulis</label>
+            <input type="text" id="quoteAuthor" oninput="render()" value="Admin ShitNyata">
+
+            <label>Highlight Kata (pisahkan koma)</label>
+            <input type="text" id="quoteHighlight" oninput="render()" value="komedi, putar"
+                placeholder="Contoh: komedi, putar">
+        </div>
+
+        <!-- CAROUSEL INPUTS -->
+        <div id="controls-carousel" class="hidden">
+            <label>Pilih Slide:</label>
+            <div class="slide-nav">
+                <div class="slide-dot active" onclick="setSlide(1)">1</div>
+                <div class="slide-dot" onclick="setSlide(2)">2</div>
+                <div class="slide-dot" onclick="setSlide(3)">3</div>
+                <div class="slide-dot" onclick="setSlide(4)">4</div>
+                <div class="slide-dot" onclick="setSlide(5)">5</div>
+            </div>
+
+            <div id="input-slide-1">
+                <h3>Slide 1: Hook</h3>
+                <label>Judul Besar</label>
+                <textarea id="c1-title" oninput="updateCarouselData()">5 Tanda Kamu Butuh Liburan</textarea>
+                <label>Sub-judul</label>
+                <input type="text" id="c1-sub" oninput="updateCarouselData()" value="Nomor 4 paling valid">
+            </div>
+
+            <div id="input-slide-content" class="hidden">
+                <h3 id="content-header">Slide Content</h3>
+                <label>Judul Slide</label>
+                <input type="text" id="c-content-title" oninput="updateCarouselData()">
+                <label>Isi Konten</label>
+                <textarea id="c-content-body" oninput="updateCarouselData()" style="height: 150px;"></textarea>
+            </div>
+
+            <div id="input-slide-5" class="hidden">
+                <h3>Slide 5: Outro</h3>
+                <label>Judul Penutup</label>
+                <input type="text" id="c5-title" oninput="updateCarouselData()" value="Setuju gak?">
+                <label>Teks CTA</label>
+                <input type="text" id="c5-cta" oninput="updateCarouselData()" value="Share ke teman lu yang stress!">
+            </div>
+        </div>
+
+        <div style="margin-top: auto">
+            <button class="btn" onclick="downloadImage()">
+                <i class="fas fa-download"></i> Download Image
+            </button>
+        </div>
+    </div>
+
+    <!-- PREVIEW AREA -->
+    <div class="preview-area">
+        <div id="canvas" class="square">
+            <div class="bg-pattern"></div>
+            <!-- V1 Elements for Quote -->
+            <div id="v1-elements" class="hidden">
+                <div class="corner-accent top-left"></div>
+                <div class="corner-accent bottom-right"></div>
+                <div class="logo">ShitNyata.</div>
+            </div>
+
+            <div id="canvas-content" style="height: 100%; width: 100%;"></div>
+
+            <div class="brand-footer">shitnyata.pages.dev</div>
+            <div class="slide-number hidden" id="slide-num-indicator">1</div>
+        </div>
+    </div>
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script>
+        let mode = 'quote';
+        let currentSlide = 1;
+
+        let carouselData = {
+            1: { title: "5 Tanda Kamu\nButuh Liburan", sub: "Nomor 4 paling valid" },
+            2: { title: "1. Mudah Marah", body: "Senggol bacok. Lihat notif WA rasanya ingin banting HP. Itu tandanya jiwa lo kering kerontang butuh asupan tiket pesawat." },
+            3: { title: "2. Lupa Hari", body: "Bangun tidur bingung ini Senin apa Minggu. Semua hari terasa sama: sama-sama menyiksa." },
+            4: { title: "3. Sering Melamun", body: "Kerja 5 menit, melamun 1 jam. Mikirin hal random kayak 'Kenapa kura-kura punya tempurung?'." },
+            5: { title: "Relate Banget?", cta: "Share ke teman lu yang butuh liburan (tapi gak punya duit)!" }
+        };
+
+        const canvas = document.getElementById('canvas');
+        const container = document.getElementById('canvas-content');
+        const slideIndicator = document.getElementById('slide-num-indicator');
+        const v1Elements = document.getElementById('v1-elements');
+
+        function init() { render(); }
+
+        function setMode(newMode) {
+            mode = newMode;
+            // Update UI buttons
+            document.getElementById('btn-mode-quote').className = mode === 'quote' ? 'mode-btn active' : 'mode-btn';
+            document.getElementById('btn-mode-carousel').className = mode === 'carousel' ? 'mode-btn active' : 'mode-btn';
+            // Update UI sections
+            document.getElementById('controls-quote').className = mode === 'quote' ? '' : 'hidden';
+            document.getElementById('controls-carousel').className = mode === 'carousel' ? '' : 'hidden';
+            slideIndicator.className = mode === 'carousel' ? 'slide-number' : 'hidden';
+            render();
+        }
+
+        function setSlide(num) {
+            currentSlide = num;
+            document.querySelectorAll('.slide-dot').forEach((dot, idx) => {
+                dot.className = (idx + 1) === num ? 'slide-dot active' : 'slide-dot';
+            });
+            document.getElementById('input-slide-1').className = num === 1 ? '' : 'hidden';
+            document.getElementById('input-slide-5').className = num === 5 ? '' : 'hidden';
+
+            const contentInputDiv = document.getElementById('input-slide-content');
+            if (num >= 2 && num <= 4) {
+                contentInputDiv.className = '';
+                document.getElementById('content-header').innerText = `Slide ${num} Content`;
+                document.getElementById('c-content-title').value = carouselData[num].title;
+                document.getElementById('c-content-body').value = carouselData[num].body;
+            } else {
+                contentInputDiv.className = 'hidden';
+            }
+            render();
+        }
+
+        function updateCarouselData() {
+            if (currentSlide === 1) {
+                carouselData[1].title = document.getElementById('c1-title').value;
+                carouselData[1].sub = document.getElementById('c1-sub').value;
+            } else if (currentSlide === 5) {
+                carouselData[5].title = document.getElementById('c5-title').value;
+                carouselData[5].cta = document.getElementById('c5-cta').value;
+            } else {
+                carouselData[currentSlide].title = document.getElementById('c-content-title').value;
+                carouselData[currentSlide].body = document.getElementById('c-content-body').value;
+            }
+            render();
+        }
+
+        function updateFormat() { canvas.className = document.getElementById('formatSelect').value; }
+
+        function render() {
+            container.innerHTML = '';
+
+            if (mode === 'quote') {
+                v1Elements.className = '';
+                renderQuote();
+            } else {
+                v1Elements.className = 'hidden';
+                renderCarousel();
+            }
+        }
+
+        function renderQuote() {
+            const text = document.getElementById('quoteInput').value;
+            const author = document.getElementById('quoteAuthor').value;
+            const highlightInput = document.getElementById('quoteHighlight').value;
+            const fontSize = document.getElementById('fontSizeInput').value;
+
+            // Update display
+            document.getElementById('fontSizeDisplay').textContent = fontSize + 'px';
+
+            let formattedText = text;
+
+            if (highlightInput) {
+                // Split by comma, trim, and ignore empty strings
+                const highlights = highlightInput.split(',').map(h => h.trim()).filter(h => h.length > 0);
+
+                if (highlights.length > 0) {
+                    // Create a regex that matches any of the words, regardless of case
+                    // Escape special characters to allow safe regex usage
+                    const escaped = highlights.map(h => h.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'));
+                    const regex = new RegExp(`(${escaped.join('|')})`, 'gi');
+                    formattedText = text.replace(regex, '<span class="highlight">$1</span>');
+                }
+            }
+
+            const html = `
+                <div class="slide-layout layout-quote">
+                    <div class="quote-text" style="font-size: ${fontSize}px"> <!-- Dynamic Font Size -->
+                        ${formattedText}
+                    </div>
+                    <div class="quote-author">
+                        ${author}
+                    </div>
+                </div>
+            `;
+            container.innerHTML = html;
+        }
+
+        function renderCarousel() {
+            slideIndicator.innerText = currentSlide;
+            const data = carouselData[currentSlide];
+
+            if (currentSlide === 1) {
+                let title = data.title.replace(/\n/g, '<br>');
+                container.innerHTML = `
+                    <div class="slide-layout layout-cover">
+                        <h1>${title}</h1>
+                        <p>${data.sub}</p>
+                        <i class="fas fa-chevron-right" style="color:var(--amber); margin-top:40px; font-size:24px; opacity:0.8;"></i>
+                    </div>
+                `;
+            } else if (currentSlide === 5) {
+                container.innerHTML = `
+                    <div class="slide-layout layout-outro">
+                        <i class="fas fa-check-circle scale-icon"></i>
+                        <h2>${data.title}</h2>
+                        <div class="cta-box">${data.cta}</div>
+                        <div class="cta-icons">
+                            <i class="far fa-heart"></i>
+                            <i class="far fa-comment"></i>
+                            <i class="far fa-bookmark"></i>
+                            <i class="far fa-paper-plane"></i>
+                        </div>
+                    </div>
+                `;
+            } else {
+                // FIXED: Vertical Centering + Center Alignment
+                container.innerHTML = `
+                    <div class="slide-layout layout-content">
+                        <h2>${data.title}</h2>
+                        <div class="body-text">${data.body.replace(/\n/g, '<br>')}</div>
+                    </div>
+                `;
+            }
+        }
+
+        function downloadImage() {
+            html2canvas(canvas, { scale: 2, backgroundColor: null }).then(canvasObj => {
+                const link = document.createElement('a');
+                let filename = mode === 'quote' ? 'quote-post.png' : `carousel-slide-${currentSlide}.png`;
+                link.download = filename;
+                link.href = canvasObj.toDataURL('image/png');
+                link.click();
+            });
+        }
+
+        init();
+    </script>
+</body>
+
+</html>
