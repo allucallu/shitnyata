@@ -6,7 +6,7 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://shitnyata.pages.dev" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: shitnyata
 github_username: shitnyata
-google_analytics: "" # Masukkan ID Google Analytics Anda di sini (Contoh: G-XXXXXXXXXX)
+google_analytics: "G-8M4F7GYREW" # Masukkan ID Google Analytics Anda di sini (Contoh: G-XXXXXXXXXX)
 
 # Build settings
 markdown: kramdown
