@@ -41,4 +41,4 @@ Kalau memang tidak sanggup rugi Rp20 miliar, saran saya sederhana: Jangan jadi a
 
 Tapi ya sudahlah. Mungkin kita harus berterima kasih pada Bapak M. Berkat dia, topeng "pengabdian" itu sedikit terbuka. Kita jadi tahu, saat mereka tersenyum di baliho pinggir jalan, yang ada di kepala mereka mungkin bukan "Bagaimana rakyat makan hari ini?", tapi "Kapan ya duit 20 miliar saya balik?"
 
-**"Jika niat menjabat adalah untuk berdagang, jangan heran jika rakyat merasa dijual, bukan diwakili."**
+> "Jika niat menjabat adalah untuk berdagang, jangan heran jika rakyat merasa dijual, bukan diwakili."
